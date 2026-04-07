@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   include PublicPage
 
   def index
-    @q = Project.with_articles.ransack(params[:q])
+    @q = Project.ransack(params[:q])
     @pagy, @projects = pagy(@q.result(distinct: true).by_popularity, limit: 24)
     set_meta_tags(
       title: "Projects",
