@@ -79,3 +79,5 @@ gem "flipper-active_record"
 gem "flipper-ui"
 
 gem "ransack"
+
+gem "noticed"
