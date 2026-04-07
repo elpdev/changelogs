@@ -93,3 +93,7 @@ gem "commonmarker"
 gem "ahoy_matey"
 
 gem "quarterdeck"
+
+group :development do
+  gem "standard"
+end
