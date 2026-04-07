@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include DefaultMetaTags
   include Searchable
   include Authentication
   include Pagy::Method
