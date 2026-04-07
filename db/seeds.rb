@@ -15,3 +15,12 @@ user = User.find_or_create_by(email_address: "admin@example.com") do |u|
 end
 
 puts "Admin user created: admin@example.com / abc123" if user.previously_new_record?
+
+# Create default project
+project = Project.find_or_create_by(github_url: "https://github.com/elpdev/changelogs") do |p|
+  p.name = "Changelogs"
+  p.description = "Track changelogs for open source projects"
+  p.language = "Ruby"
+end
+
+puts "Project created: #{project.name} (#{project.slug})" if project.previously_new_record?
