@@ -87,3 +87,5 @@ gem "letter_opener_web", group: :development
 gem "meta-tags"
 
 gem "sitemap_generator"
+
+gem "commonmarker"
