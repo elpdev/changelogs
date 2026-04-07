@@ -8,4 +8,5 @@ constraints AdminConstraint.new do
     resources :users
     root to: "dashboard#show"
   end
+  mount Flipper::UI.app(Flipper), at: "/admin/flipper"
 end

@@ -71,3 +71,9 @@ gem "jwt", "~> 2.7"
 gem "madmin"
 
 gem "mission_control-jobs"
+
+gem "flipper"
+
+gem "flipper-active_record"
+
+gem "flipper-ui"
