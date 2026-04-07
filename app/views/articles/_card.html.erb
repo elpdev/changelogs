@@ -1,0 +1,36 @@
+<article class="py-5 group">
+  <div class="flex items-start gap-4">
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center gap-2 mb-1.5">
+        <%= link_to project_path(article.project) do %>
+          <%= render Badge::Component.new(
+            text: article.project.name,
+            variant: :default,
+            size: :small,
+            extra_classes: "hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+          ) %>
+        <% end %>
+        <span class="text-xs text-gray-400 dark:text-gray-500 font-mono">
+          <%= article.published_at&.strftime("%b %-d, %Y") %>
+        </span>
+      </div>
+
+      <%= link_to article_path(article),
+          class: "block group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors" do %>
+        <h3 class="text-base font-semibold text-gray-900 dark:text-white leading-snug">
+          <%= article.title %>
+        </h3>
+      <% end %>
+
+      <% if article.summary.present? %>
+        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+          <%= article.summary %>
+        </p>
+      <% end %>
+
+      <div class="mt-2 flex items-center gap-3 text-xs text-gray-400 dark:text-gray-500">
+        <span class="font-mono"><%= article.reading_time %> min read</span>
+      </div>
+    </div>
+  </div>
+</article>

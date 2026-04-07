@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_07_030107) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_07_034335) do
   create_table "ahoy_events", force: :cascade do |t|
     t.string "name"
     t.text "properties"
@@ -67,6 +67,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_07_030107) do
     t.index ["user_id"], name: "index_api_keys_on_user_id"
   end
 
+  create_table "articles", force: :cascade do |t|
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.integer "project_id", null: false
+    t.datetime "published_at"
+    t.string "slug", null: false
+    t.text "summary"
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id", "published_at"], name: "index_articles_on_project_id_and_published_at"
+    t.index ["project_id"], name: "index_articles_on_project_id"
+    t.index ["published_at"], name: "index_articles_on_published_at"
+    t.index ["slug"], name: "index_articles_on_slug", unique: true
+  end
+
   create_table "flipper_features", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "key", null: false
@@ -107,6 +122,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_07_030107) do
     t.index ["recipient_type", "recipient_id"], name: "index_noticed_notifications_on_recipient"
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.integer "articles_count", default: 0
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "github_url", null: false
+    t.string "language"
+    t.datetime "last_synced_at"
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.integer "stars_count", default: 0
+    t.datetime "updated_at", null: false
+    t.index ["github_url"], name: "index_projects_on_github_url", unique: true
+    t.index ["language"], name: "index_projects_on_language"
+    t.index ["slug"], name: "index_projects_on_slug", unique: true
+    t.index ["stars_count"], name: "index_projects_on_stars_count"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "ip_address"
@@ -127,5 +159,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_07_030107) do
   end
 
   add_foreign_key "api_keys", "users"
+  add_foreign_key "articles", "projects"
   add_foreign_key "sessions", "users"
 end

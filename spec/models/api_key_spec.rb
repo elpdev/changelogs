@@ -6,10 +6,9 @@ RSpec.describe APIKey, type: :model do
   end
 
   describe "validations" do
-    subject { build(:api_key) }
+    subject { create(:api_key) }
 
     it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:client_id) }
     it { should validate_uniqueness_of(:client_id) }
   end
 

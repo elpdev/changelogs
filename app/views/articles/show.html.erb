@@ -1,0 +1,58 @@
+<% content_for :head do %>
+  <link rel="canonical" href="<%= article_url(@article) %>">
+<% end %>
+
+<article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <header class="mb-10">
+    <div class="flex items-center gap-2 mb-4">
+      <%= link_to project_path(@article.project) do %>
+        <%= render Badge::Component.new(
+          text: @article.project.name,
+          variant: :default,
+          size: :medium,
+          extra_classes: "hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+        ) %>
+      <% end %>
+    </div>
+
+    <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white leading-tight">
+      <%= @article.title %>
+    </h1>
+
+    <div class="mt-4 flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 font-mono">
+      <time datetime="<%= @article.published_at&.iso8601 %>">
+        <%= @article.published_at&.strftime("%B %-d, %Y") %>
+      </time>
+      <span>&middot;</span>
+      <span><%= @article.reading_time %> min read</span>
+    </div>
+  </header>
+
+  <div class="mb-12">
+    <%= render Markdown::Component.new(text: @article.content, extra_classes: "prose-lg max-w-none") %>
+  </div>
+
+  <footer class="pt-8 border-t border-gray-200 dark:border-gray-800">
+    <div class="flex items-center justify-between">
+      <%= link_to project_path(@article.project),
+          class: "inline-flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400
+                 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-mono" do %>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        All <%= @article.project.name %> articles
+      <% end %>
+
+      <% if @article.project.github_url.present? %>
+        <a href="<%= @article.project.github_url %>" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400
+                  hover:text-gray-700 dark:hover:text-gray-200 transition-colors font-mono">
+          View on GitHub
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+          </svg>
+        </a>
+      <% end %>
+    </div>
+  </footer>
+</article>
