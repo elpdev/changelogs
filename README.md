@@ -455,6 +455,3 @@ RSpec.describe User, type: :model do
 end
 ```
 
----
-
-Generated with [Boilercode](https://boilercode.io)
