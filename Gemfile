@@ -89,3 +89,7 @@ gem "meta-tags"
 gem "sitemap_generator"
 
 gem "commonmarker"
+
+gem "ahoy_matey"
+
+gem "quarterdeck"
